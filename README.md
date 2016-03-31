@@ -13,15 +13,15 @@ Mark as Test Source todas as subpastas imediatas de test (não as subpastas das 
 
 Run configurations:
 
-Grails:TA
+Grails: SocietySystem
 
-run-app
+-noreloading run-app
 
-Cucumber:TA
+Cucumber: SocietySystem
 
 (IntelliJ) Para rodar os testes, crie uma configuração do grails com a seguinte linha de comando:
 
-test-app -Dgeb.env=chrome functional:cucumber
+-noreloading test-app -Dgeb.env=chrome functional:cucumber
 
 Integração com o Travis-ci 
 Entre em Travis-CI 
