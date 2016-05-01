@@ -1,27 +1,27 @@
-Feature: As um usuário,
+Feature: As um usuï¿½rio,
   I can criar, alterar, modificar e remover um Campo do meu Society
   so that eu posso administrar o meu society de forma coerente
 
-  Scenario: Atualizar a lista de Campos assim que adicionar um novo
-    Given que o usuário cadastrou um campo ao seu Society
-    When clicar na imagem do seu society
+  Scenario: Atualizar a lista de Campos assim que adicionar um novo Campo
+    Given usuario cadastrou o campo com nome "A" ao seu Society
+    When  estou na pagina "detalhes do Society X"
     Then uma lista atualizada com todos os campos cadastrados deve aparecer na tela "Campos do Society X"
 
-  Scenario[GUI]: Cadastrar Campo à Lista de Campos de um Society Específico
+  Scenario: Cadastrar Campo "B" a Lista de Campos de um Society "C"
 
     Given eu estou na tela de cadastro de Campos de um Society
     And eu preencho os dados corretamente
-    When eu clico “Finalizar Cadastro”
-    Then eu sou enviado à tela de Detalhes do Society e Uma mensagem de Sucesso é mostrada
+    When  ï¿½Finalizar Cadastroï¿½
+    Then sou enviado ï¿½ tela de Detalhes do Society e Uma mensagem de Sucesso ï¿½ mostrada
 
-  Scenario[GUI]: Cadastrar um mesmo campo duas vezes
+  Scenario: Cadastrar um mesmo campo duas vezes
     Given eu estou na tela cadastrar campo
-    And preencho o nome do campo como campo “A”
-    When clico em “cadastrar o campo”
-    Then o sistema dá uma mensagem dizendo que o campo já existe
+    And preencho o nome do campo como campo "A"
+    When  cadastro o campo "A"
+    Then o sistema exibe uma mensagem "o campo A ja existe"
 
   Scenario: Cadastrar Campo com dados insuficientes
     Given eu estou na tela de cadastrar campo
-    And eu não preencho o nome do campo
-    When clico em "cadastrar o campo"
+    And eu nï¿½o preencho o nome do campo
+    When tento cadastrar o campo
     Then o sistem emite uma mensagem de erro

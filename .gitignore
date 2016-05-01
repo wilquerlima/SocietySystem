@@ -31,3 +31,12 @@
 
 # "temporary" build files
 /target
+
+# "Arquivos extras"
+**/.idea/compiler.xml
+.idea/*.xml
+.slcache/
+grails-app/grails-app.iml
+web-app/WEB-INF/*
+*.iml
+out/*
