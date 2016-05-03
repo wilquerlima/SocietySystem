@@ -20,3 +20,9 @@ When(~'^"([^"]*)" adicionar "([^"]*)" ao grupo "([^"]*)"$')
             p1, p2, grupo ->
 
         }
+
+Then(~'^"([^"]*)" passará a receber convites de jogos de "([^"]*)" destinados ao grupo "([^"]*)"$')
+        {
+            p1, p2, nomeGrupo ->
+                def grupo = BancoGrupo.findbyNome(nomeGrupo)
+        }
