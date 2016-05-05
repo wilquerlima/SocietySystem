@@ -1,3 +1,10 @@
+import steps.BancoPessoa
+import steps.BancoGrupo
+import steps.TesteBancoGrupo
+
+import static cucumber.api.groovy.pt.*
+
+
 Given (~'^"([^"]*)" é um usuário cadastrado no sistema$')
         {
             nome ->
@@ -17,12 +24,13 @@ Given(~'^"([^"]*)"  tem um grupo com usuários "([^"]*)"$')
 
 When(~'^"([^"]*)" adicionar "([^"]*)" ao grupo "([^"]*)"$')
         {
-            p1, p2, grupo ->
-
+            p1, p2, nomeGrupo ->
+                def grupo = TesteBancoGrupo
         }
 
 Then(~'^"([^"]*)" passará a receber convites de jogos de "([^"]*)" destinados ao grupo "([^"]*)"$')
         {
             p1, p2, nomeGrupo ->
                 def grupo = BancoGrupo.findbyNome(nomeGrupo)
+
         }
