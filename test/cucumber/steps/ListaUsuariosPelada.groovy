@@ -1,36 +1,45 @@
-import steps.BancoPessoa
-import steps.BancoGrupo
-import steps.TesteBancoGrupo
-
 import static cucumber.api.groovy.pt.*
 
+import cucumber.api.PendingException
 
-Given (~'^"([^"]*)" é um usuário cadastrado no sistema$')
+import steps.TesteUsuario
+import societysystem.UsuarioController
+import societysystem.GrupoController
+import societysystem.Usuario
+
+Given (~'^"([^"]*)" é um grupo pertencente ao usuario de cpf "([^"]*)"$')
         {
-            nome ->
-                def pessoa = BancoPessoa.findbyNome(nome)
-                assert pessoa == null
+            String grupo, cpf ->
+            def t = new TesteUsuario()
+            def contGrupo = new GrupoController()
+            def contUsuario = new UsuarioController()
+            t.createGrupo(grupo, 1, contGrupo)
+            t.createUsuario(cpf, 'andre', true, 1, contUsuario)
+            def usu = Usuario.findByCpf(cpf)
+            def gru = Grupo.finfByNome(grupo)
+            assert usu == false
+            assert gru == false
+            assert t.isUsuarioGrupo(usu, gru) == false
         }
 
-Given(~'^"([^"]*)"  tem um grupo com usuários "([^"]*)"$')
+And (~'^"([^"]*)" não cpf de um usuário cadastrado no sistema$')
         {
-            nome, nomeGrupo ->
-                def pessoa = BancoPessoa.findbyNome(nome)
-                assert pessoa == null
-                def grupo = BancoGrupo.findbyNome(nomeGrupo)
-                assert grupo == null
-                assert grupo.getAdm(nome) == null
+            String cpf ->
+                assert Usuario.findByCpf(cpf) == true
         }
 
-When(~'^"([^"]*)" adicionar "([^"]*)" ao grupo "([^"]*)"$')
+When (~'^"([^"]*)" tenta adicionar "([^"]*)" ao grupo "([^"]*)"$')
         {
-            p1, p2, nomeGrupo ->
-                def grupo = TesteBancoGrupo
+            Sting usu1, usu2, grupo ->
+                def t = new TesteUsuario()
+                assert t.isOwnerGroup(usu1, grupo) == false
+                t.adicionaGrupo(usu1, usu2)
         }
 
-Then(~'^"([^"]*)" passará a receber convites de jogos de "([^"]*)" destinados ao grupo "([^"]*)"$')
+Then (~'^O sistema não adiciona "([^"]*)"$')
         {
-            p1, p2, nomeGrupo ->
-                def grupo = BancoGrupo.findbyNome(nomeGrupo)
-
+            String cpf ->
+            def usu = Usuario.findByCpf(cpf)
+            assert usu == true
+            assert usu.idGrupo != 0
         }
