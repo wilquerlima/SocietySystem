@@ -43,3 +43,29 @@ Then (~'^O sistema não adiciona "([^"]*)"$')
             assert usu == true
             assert usu.idGrupo != 0
         }
+
+
+
+
+
+
+
+Give (~'^O usuario de cpf "([^"]*)" está no página de adicionar usuário ao grupo "([^"]*)"$')
+        {
+
+        }
+
+And(~'^O usuario de cpf "([^"]*)" não aparece na lista de pessoas aptas a ser adicionadas$')
+        {
+
+        }
+
+When(~'"([^"]*)" tenta adicionar "([^"]*)"$')
+        {
+
+        }
+
+Then(~'^Uma mensagem de erro é exibida$')
+        {
+
+        }
