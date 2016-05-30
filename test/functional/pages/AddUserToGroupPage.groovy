@@ -11,9 +11,10 @@ class AddUserToGroupPage extends Page
                 title =~ /adicionar pessoa a grupo/
             }
 
-    void addPessoa(pessoa, addPessoa, grupo)
+    void addPessoa(pessoaCppf, addPessoaCpf, grupo)
     {
-        
+        //$("input", name: "name") = pessoaCppf
+        //$("input", name: "name") = addPessoaCpf
     }
 
     void isMember(cpf, group)

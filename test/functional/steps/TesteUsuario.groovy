@@ -1,26 +1,27 @@
 package steps
 
+import cucumber.api.PendingException
 import societysystem.Usuario
 import societysystem.Grupo
 import societysystem.UsuarioController
 import societysystem.GrupoController
 
 
-def createUsuario(def cpf, String nome, boolean isOwner, int idGrupo, def cont)
+def createUsuario(def cpf, String nome, boolean isOwner, int idGrupo, UsuarioController cont)
 {
     cont.params << [cpf: cpf, nome: nome, isOwner: isOwner, idGrupo: idGrupo]
     cont.save()
-    cont.response.reset
+    cont.response.reset()
 }
 
-void createGrupo(String nome, int id, def cont)
+void createGrupo(String nome, int id, GrupoController cont)
 {
     cont.params << [nome: nome, id: id]
     cont.save()
-    cont.response.reset
+    cont.response.reset()
 }
 
-boolean isUsuarioGrupo(def usu, def gru)
+boolean isUsuarioGrupo(Usuario usu, Grupo gru)
 {
     if (usu.idGrupo == Grupo.findByNome(gru.nome))
     {
@@ -30,7 +31,7 @@ boolean isUsuarioGrupo(def usu, def gru)
     return false
 }
 
-void adicionaGrupo(def dono, def novo)
+void adicionaGrupo(Usuario dono, Usuario novo)
 {
     if (dono.isOwner)
     {
@@ -38,7 +39,7 @@ void adicionaGrupo(def dono, def novo)
     }
 }
 
-boolean isOwnerGroup(def usu, String grupoNome)
+boolean isOwnerGroup(Usuario usu, String grupoNome)
 {
     def grupo = Grupo.findByNome(grupoNome)
 
@@ -49,3 +50,5 @@ boolean isOwnerGroup(def usu, String grupoNome)
 
     return false
 }
+
+//test-app -Dgeb.env=chrome functional:cucumber --stacktrace --verbose

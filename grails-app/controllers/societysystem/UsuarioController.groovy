@@ -8,7 +8,7 @@ import grails.transaction.Transactional
 @Transactional(readOnly = true)
 class UsuarioController {
 
-    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+    static allowedMethods = [update: "PUT", delete: "DELETE"]
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
@@ -24,26 +24,16 @@ class UsuarioController {
     }
 
     @Transactional
-    def save(Usuario usuarioInstance) {
-        if (usuarioInstance == null) {
-            notFound()
+    def save() {
+        Usuario usuarioInstance = new Usuario(params)
+
+        if (!usuarioInstance.save(flush: true)) {
+            render(view: "create", model: [usuarioInstance: usuarioInstance])
             return
         }
 
-        if (usuarioInstance.hasErrors()) {
-            respond usuarioInstance.errors, view:'create'
-            return
-        }
-
-        usuarioInstance.save flush:true
-
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.created.message', args: [message(code: 'usuario.label', default: 'Usuario'), usuarioInstance.id])
-                redirect usuarioInstance
-            }
-            '*' { respond usuarioInstance, [status: CREATED] }
-        }
+        flash.message = message(code: 'default.created.message', args: [message(code: 'default.list.label', default: 'Usuario'), usuarioInstance.cpf ])
+        redirect(action: "show", cpf: usuarioInstance.cpf)
     }
 
     def edit(Usuario usuarioInstance) {

@@ -24,26 +24,16 @@ class GrupoController {
     }
 
     @Transactional
-    def save(Grupo grupoInstance) {
-        if (grupoInstance == null) {
-            notFound()
+    def save() {
+        Grupo grupoInstance = new Grupo(params)
+
+        if (!grupoInstance.save(flush: true)) {
+            render(view: "create", model: [grupoInstance: grupoInstance])
             return
         }
 
-        if (grupoInstance.hasErrors()) {
-            respond grupoInstance.errors, view:'create'
-            return
-        }
-
-        grupoInstance.save flush:true
-
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.created.message', args: [message(code: 'grupo.label', default: 'Grupo'), grupoInstance.id])
-                redirect grupoInstance
-            }
-            '*' { respond grupoInstance, [status: CREATED] }
-        }
+        flash.message = message(code: 'default.created.message', args: [message(code: 'default.list.label', default: 'grupo'), grupoInstance.id])
+        redirect(action: "show", id: grupoInstance.id)
     }
 
     def edit(Grupo grupoInstance) {
