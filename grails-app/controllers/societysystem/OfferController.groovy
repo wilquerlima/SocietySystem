@@ -8,11 +8,23 @@ import grails.transaction.Transactional
 @Transactional(readOnly = true)
 class OfferController {
 
-    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+    static allowedMethods = [update: "PUT", delete: "DELETE"]
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         respond Offer.list(params), model:[offerInstanceCount: Offer.count()]
+    }
+
+    def book() {
+        def offer = Offer.findByActivated(false)
+        if (offer != null) {
+            offer.select()
+            offer.save(flush:true)
+            flash.message = "Offer activated"
+        } else {
+            flash.message = "Offer already activated"
+        }
+        redirect(action: "index")
     }
 
     def show(Offer offerInstance) {

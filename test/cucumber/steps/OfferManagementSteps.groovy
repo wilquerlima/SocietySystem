@@ -1,17 +1,23 @@
 package steps
 
+import pages.CreatePage
+import pages.OfferActivationPage
 import pages.SocietySettingsPage
+import societysystem.Offer
+import societysystem.OfferController
+import static cucumber.api.groovy.EN.*
 
 this.metaClass.mixin(cucumber.api.groovy.Hooks)
 this.metaClass.mixin(cucumber.api.groovy.EN)
 
-Given(~'^The offer "([^"]*)" with id "([^"]*)" exists$'){String description, id ->
-    def controller = new OfferController()
-    createOffer(description, id, controller)
+Given(~'^The offer "([^"]*)" is already created$'){String description ->
+    to CreatePage
+    at CreatePage
+    page.createOffer(description)
 
 }
 
-And(~'^I am at the "Offer activation" page$'){
+And(~'^I am at "([^"]*)" page$'){ String ignore ->
     to OfferActivationPage
     at OfferActivationPage
 }
@@ -23,5 +29,17 @@ When(~'^i choose the offer "([^"]*)"$') { String offerDesc ->
 
 Then(~'^The offer "([^"]*)" is set as activated$'){ String offerDesc ->
     at OfferActivationPage
-    assert page.offerIsActivated(offerDesc)
+    assert offerIsActivated(offerDesc) == true
 }
+
+def createOffer(String description, String id, OfferController controller) {
+    controller.params << [description: description, id: id, activated: false]
+    controller.save()
+    controller.response.reset()
+}
+
+boolean offerIsActivated(String offerDesc){
+    Offer c = Offer.findByDescription(offerDesc)
+    return c.activated
+}
+
