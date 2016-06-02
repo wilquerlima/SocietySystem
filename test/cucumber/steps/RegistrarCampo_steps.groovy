@@ -1,36 +1,70 @@
 /**
  * Created by felip_000 on 05/01/16.
+ *
+ * Class created to model the test the action RegisterField()
  */
 
 
-import cucumber.api.PendingException
-import pages.Society.SocietyList
-import pages.Society.Society
+import pages.RegisterFieldPage
+import societysystem.SocietyController
+import steps.TestAndDataOperations
 
-this.metaClass.mixin(cucumber.api.groovy.Hooks)
-this.metaClass.mixin(cucumber.api.groovy.EN)
+import static cucumber.api.groovy.EN.*
+import societysystem.Field
 
 
-Given(~'^Usuario cadastrou campo com o nome ([^"]*) ao seu Society.Society $') {
-    String campoNome, IDSociety -> assert SocietyManager.getSociety(IDSociety).Cadastrar(campoNome)
+Given(~'^I am at Register Field page$'){->
+    to RegisterFieldPage
+    waitFor { at(RegisterFieldPage) }
 }
 
-When(~"^Estou na pagina 'detalhes do campo X'") {
-    to Society.Detalhe
-    at Society.Detalhe
+And(~'^I do not fill the page name attribute field$'){->
+    assert page.nameField.text() == ''
+
 }
 
-Then(~'^A lista de campos cadastrados o Society.Society (.*) e atualizada com o campo (.*) $'){
-    throw new PendingException()
+When(~'^I try to finish the Registration$'){->
+    page.submit.click()
 }
 
+Then(~'^The system shows an error message$'){->
+    at RegisterFieldPage
+    assert page.nameField.back
+
+}
 
 /*
-* Scenario: Cadastrar Campo "B" a Lista de Campos de um Society.Society "C"
+*
 * */
 
-Given(~'^eu estou na tela de cadastro de Campos de um Society.Society'){->
-    to SocietyPage.CadastrarCampo
-    at SocietyPage.CadastrarCampo
+Given(~'^There is no Field named "([^"]*)"$'){
+
+    /*
+    * Seto o sistema para ter pelo menos um campo com nome "A"
+    * */
+    String name ->
+        t = new TestAndDataOperations()
+        assert t.retornarCampoByname(name) == null
+
 }
 
+When(~'^I try to register the field "([^"]*)"$'){
+    /*
+    * Eu tento salvar um campo com o nome "A" no sistema, com informações adicionais diferentes
+    * */
+    String name ->
+        t = new TestAndDataOperations()
+        int valor = 20
+        t.cadastrarCampo(name, valor)
+
+
+}
+
+Then(~'^The system does register Field "([^"]*)"$'){String name ->
+    /*
+    * I'll check if the value of the examples is 40 or 20
+    * */
+    t = new TestAndDataOperations()
+    Field c = t.retornarCampoByname(name)
+    assert c.value == 20
+}
