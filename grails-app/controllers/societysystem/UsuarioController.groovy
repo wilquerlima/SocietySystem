@@ -23,6 +23,12 @@ class UsuarioController {
         respond new Usuario(params)
     }
 
+    def addUserToGroup()
+    {
+        render (view: "addUserToGroup")
+    }
+
+
     @Transactional
     def save() {
         Usuario usuarioInstance = new Usuario(params)
@@ -91,4 +97,12 @@ class UsuarioController {
             '*'{ render status: NOT_FOUND }
         }
     }
+
+    def criarUsuario(String cpf, String nome, boolean isOwner)
+    {
+        def usuario = new Usuario(cpf: cpf, nome: nome, isOwner: isOwner)
+        usuario.save(flush: true)
+    }
+
+
 }

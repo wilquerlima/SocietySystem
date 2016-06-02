@@ -7,23 +7,24 @@ import societysystem.UsuarioController
 import societysystem.GrupoController
 
 
-def createUsuario(def cpf, String nome, boolean isOwner, int idGrupo, UsuarioController cont)
+def createUsuario(def cpf, String nome, boolean isOwner, UsuarioController cont)
 {
-    cont.params << [cpf: cpf, nome: nome, isOwner: isOwner, idGrupo: idGrupo]
-    cont.save()
+    cont.criarUsuario(cpf, nome, isOwner)
     cont.response.reset()
 }
 
-void createGrupo(String nome, int id, GrupoController cont)
+void createGrupo(String nome, int id, Usuario usu, GrupoController cont)
 {
-    cont.params << [nome: nome, id: id]
-    cont.save()
+    cont.criarGrupo(nome, id)
+    usu.isOwner = true
+    usu.idGrupo = id
     cont.response.reset()
 }
 
 boolean isUsuarioGrupo(Usuario usu, Grupo gru)
 {
-    if (usu.idGrupo == Grupo.findByNome(gru.nome))
+    def grupo = Grupo.findByNome(gru.nome)
+    if (usu.idGrupo == grupo.id)
     {
         return true
     }
@@ -31,11 +32,12 @@ boolean isUsuarioGrupo(Usuario usu, Grupo gru)
     return false
 }
 
-void adicionaGrupo(Usuario dono, Usuario novo)
+void adicionaGrupo(Usuario dono, String cpfNovo)
 {
-    if (dono.isOwner)
+    def novo = Usuario.findByCpf(cpfNovo)
+    if (dono.getIsOwner() && novo != null)
     {
-        novo.idGrupo = dono.idGrupo
+        novo.setIdGrupo(dono.getIdGrupo())
     }
 }
 

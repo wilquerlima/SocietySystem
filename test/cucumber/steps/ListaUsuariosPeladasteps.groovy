@@ -9,14 +9,15 @@ import societysystem.Usuario
 import pages.AddUserToGroupPage
 import static cucumber.api.groovy.EN.*
 
+
 Given(~/^"([^"]*)" is the owner of the group "([^"]*)"$/) {
     String cpf, String grupo ->
         def t = new TesteUsuario()
         GrupoController contGrupo = new GrupoController()
         UsuarioController contUsuario = new UsuarioController()
-        t.createGrupo(grupo, 1, contGrupo)
-        t.createUsuario(cpf, 'andre', true, 1, contUsuario)
+        t.createUsuario(cpf, 'andre', true, contUsuario)
         def usu = Usuario.findByCpf(cpf)
+        t.createGrupo(grupo, 1, usu, contGrupo)
         def gru = Grupo.findByNome(grupo)
         assert usu != null
         assert gru != null
@@ -26,21 +27,21 @@ Given(~/^"([^"]*)" is the owner of the group "([^"]*)"$/) {
 
 And(~/^"([^"]*)" is not the cpf of a registred user$/) {
     String cpf ->
-    assert Usuario.findByCpf(cpf) == true
+    assert Usuario.findByCpf(cpf) == null
 }
 
 When(~/^"([^"]*)" tries to add "([^"]*)" to the group "([^"]*)"$/) {
-    String usu1, usu2, grupo ->
+    String usuNome1, String usuNome2, String grupo ->
     def t = new TesteUsuario()
+    def usu1 = Usuario.findByCpf(usuNome1)
     assert t.isOwnerGroup(usu1, grupo) == true
-    t.adicionaGrupo(usu1, usu2)
+    t.adicionaGrupo(usu1, usuNome2)
 }
 
 Then(~/^The system do not add "([^"]*)"$/) {
     String cpf ->
     def usu = Usuario.findByCpf(cpf)
     assert usu == null
-    assert usu.idGrupo != 0
 }
 
 
@@ -51,7 +52,7 @@ Given(~/^The user of cpf "([^"]*)" is at add user to the group "([^"]*)" page$/)
         to AddUserToGroupPage
 }
 
-When(~/^"([^"]*)" tries to add the user to the cpf  "([^"]*)" to the group "([^"]*)"$/) {
+When(~/^"([^"]*)" tries to add the user of cpf  "([^"]*)" to the group "([^"]*)"$/) {
     String cpf1, String cpf2, String group->
         at AddUserToGroupPage
         page.addPessoa(cpf1, cpf2, group)
@@ -65,5 +66,7 @@ And(~/^"([^"]*)" is not listed between the group member "([^"]*)"$/) {
 
 Then(~/^A subscription confirmation message to the group is shown$/) { ->
     at AddUserToGroupPage
-    flash.message = "pessoa adicionada ao grupo"
+
 }
+
+

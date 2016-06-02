@@ -10,7 +10,7 @@ Feature: List of users that used to participating of the same soccer macth
     When “88888888888” adds “99999999999” to the group “Pelada fim de semana”
     Then “99999999999” will pass to recive the game of “88888888888” destinataded to the group “Pelada fim de semana”
 
-
+  @ignore
   Scenario: Adding inexisting user to a group
    Given "88888888888" is the owner of the group "Pelada fim de semana"
      And "99999999999" is not the cpf of a registred user
@@ -20,7 +20,7 @@ Feature: List of users that used to participating of the same soccer macth
 
   Scenario: [GUI] Adding user to an inexistent group
     Given The user of cpf "88888888888" is at add user to the group "Pelada fim de semana" page
-    When "88888888888" tries to add the user to the cpf  "99999999999" to the group "Pelada fim de semana"
+    When "88888888888" tries to add the user of cpf  "99999999999" to the group "Pelada fim de semana"
     And "88888888888" is not listed between the group member "Pelada fim de semana"
     Then A subscription confirmation message to the group is shown
 
