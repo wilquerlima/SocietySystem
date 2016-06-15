@@ -4,6 +4,8 @@ package societysystem
 
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
+import societysystem.UsuarioController
+import societysystem.Usuario
 
 @Transactional(readOnly = true)
 class GrupoController {
@@ -27,6 +29,18 @@ class GrupoController {
         def grupo = new Grupo( id:id, nome:nome)
         grupo.save(flush:true)
 
+    }
+
+    def AddUser()
+    {
+        render(view: "AddUser", model: [usuarios: Usuario.list()])
+    }
+
+    def addToGroup(Usuario usuario, Grupo g)
+    {
+        g.addToUsuarios(usuarios: usuario)
+        flash.message = message(code: 'default.created.message', args: [message(code: 'default.list.label', default: 'grupo'), g.id])
+        redirect(action: "index", id: g.id)
     }
 
     @Transactional

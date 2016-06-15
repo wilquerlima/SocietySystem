@@ -20,12 +20,18 @@ class UsuarioController {
     }
 
     def create() {
+        params << [idGrupo: 0, isOwner: false]
         respond new Usuario(params)
     }
 
     def addUserToGroup()
     {
-        render (view: "addUserToGroup")
+        respond Usuario.list(params), model:[usuarioInstanceCount: Usuario.count()]
+    }
+
+    def addUser()
+    {
+
     }
 
 
@@ -39,7 +45,7 @@ class UsuarioController {
         }
 
         flash.message = message(code: 'default.created.message', args: [message(code: 'default.list.label', default: 'Usuario'), usuarioInstance.cpf ])
-        redirect(action: "show", cpf: usuarioInstance.cpf)
+        redirect(action: "index", cpf: usuarioInstance.cpf)
     }
 
     def edit(Usuario usuarioInstance) {

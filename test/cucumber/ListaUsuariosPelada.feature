@@ -18,10 +18,10 @@ Feature: List of users that used to participating of the same soccer macth
    Then The system do not add "99999999999"
 
 
-  Scenario: [GUI] Adding user to an inexistent group
+  Scenario: [GUI] Adding user to a group
     Given The user of cpf "88888888888" is at add user to the group "Pelada fim de semana" page
     When "88888888888" tries to add the user of cpf  "99999999999" to the group "Pelada fim de semana"
-    And "88888888888" is not listed between the group member "Pelada fim de semana"
+    And "99999999999" is not listed between the group member "Pelada fim de semana"
     Then A subscription confirmation message to the group is shown
 
 @ignore

@@ -13,6 +13,7 @@
 			<ul>
 				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
 				<li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
+				<li><g:link class="create" action="AddUser"><g:message code="Adicionar usuario" args="[entityName]" /></g:link></li>
 			</ul>
 		</div>
 		<div id="list-grupo" class="content scaffold-list" role="main">
@@ -32,7 +33,7 @@
 				<g:each in="${grupoInstanceList}" status="i" var="grupoInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 					
-						<td><g:link action="show" id="${grupoInstance.id}">${fieldValue(bean: grupoInstance, field: "nome")}</g:link></td>
+						<td><g:link action="AddUser" id="${grupoInstance.id}">${fieldValue(bean: grupoInstance, field: "nome")}</g:link></td>
 					
 					</tr>
 				</g:each>
