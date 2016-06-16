@@ -29,12 +29,6 @@ class UsuarioController {
         respond Usuario.list(params), model:[usuarioInstanceCount: Usuario.count()]
     }
 
-    def addUser()
-    {
-
-    }
-
-
     @Transactional
     def save() {
         Usuario usuarioInstance = new Usuario(params)

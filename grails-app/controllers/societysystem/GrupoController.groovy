@@ -38,7 +38,7 @@ class GrupoController {
 
     def addToGroup(Usuario usuario, Grupo g)
     {
-        g.addToUsuarios(usuarios: usuario)
+       addUsuario(usario, g)
         flash.message = message(code: 'default.created.message', args: [message(code: 'default.list.label', default: 'grupo'), g.id])
         redirect(action: "index", id: g.id)
     }
@@ -110,5 +110,10 @@ class GrupoController {
             }
             '*'{ render status: NOT_FOUND }
         }
+    }
+
+    void addUsuario(Usuario usuario, Grupo grupo)
+    {
+        grupo.addToUsuarios(usuarios: usuario)
     }
 }

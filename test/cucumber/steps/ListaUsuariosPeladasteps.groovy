@@ -47,26 +47,29 @@ Then(~/^The system do not add "([^"]*)"$/) {
 
 
 
-Given(~/^The user of cpf "([^"]*)" is at add user to the group "([^"]*)" page$/) {
-    String cpf, String group ->
-        to AddUserToGroupPage
+
+Given(~/^I am at add user to the group "([^"]*)" page$/) { String arg1 ->
+    to AddUserToGroupPage
 }
 
-When(~/^"([^"]*)" tries to add the user of cpf  "([^"]*)" to the group "([^"]*)"$/) {
-    String cpf1, String cpf2, String group->
-        at AddUserToGroupPage
-        page.addPessoa(cpf1, cpf2, group)
-}
 
 And(~/^"([^"]*)" is not listed between the group member "([^"]*)"$/) {
     String cpf, String group ->
         at AddUserToGroupPage
-        page.isMember(cpf, group)
+        page.criarUsuario(cpf)
+        page.criarGrupo(group)
+        assert page.isMember(cpf, group) == false
+}
+
+
+When(~/^I try to add the user of cpf  "([^"]*)" to the group "([^"]*)"$/) {
+    String cpf, String group->
+    at AddUserToGroupPage
+    page.addPessoa(cpf, group)
 }
 
 Then(~/^A subscription confirmation message to the group is shown$/) { ->
     at AddUserToGroupPage
-
 }
 
 
