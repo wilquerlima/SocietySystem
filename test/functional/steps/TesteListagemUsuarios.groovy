@@ -22,5 +22,5 @@ boolean isMember(String usuarioCPF, String grupoNome)
     def usu = Usuario.findByCpf(usuarioCPF)
     def gru = Grupo.findByNome(grupoNome)
 
-    if (gru.getUsuarios().)
+   // if (gru.getUsuarios())
 }

@@ -10,6 +10,7 @@ class Usuario {
     static belongsTo = [grupo: Grupo]
     static hasOne = [grupo: Grupo]
 
+
     static constraints = {
         grupo nullable: true
     }
