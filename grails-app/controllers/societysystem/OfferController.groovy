@@ -27,6 +27,19 @@ class OfferController {
         redirect(action: "index")
     }
 
+    def select(Long id) {
+        def offer = Offer.get(id)
+        if (!offer) {
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'offer.label', default: 'Offer'), id])
+            return
+        }
+        offer.select()
+        if (!offer.save(flush: true)) {
+            flash.message = "Offer could not be activated!\n" + vaga.errors
+        }
+        redirect(action: "overview")
+    }
+
     def show(Offer offerInstance) {
         respond offerInstance
     }
@@ -34,6 +47,8 @@ class OfferController {
     def create() {
         respond new Offer(params)
     }
+
+
 
     @Transactional
     def save(Offer offerInstance) {

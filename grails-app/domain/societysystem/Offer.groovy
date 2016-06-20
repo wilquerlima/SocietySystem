@@ -1,7 +1,7 @@
 package societysystem
 
 class Offer {
-    String description, id
+    String description
     boolean activated
 
     def select() {
