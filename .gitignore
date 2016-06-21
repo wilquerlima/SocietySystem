@@ -31,21 +31,14 @@
 
 # "temporary" build files
 /target
-
-# "Arquivos extras"
-.idea/
-**/.idea/compiler.xml
-.idea/*.xml
-.slcache/
-grails-app/grails-app.iml
-web-app/WEB-INF/*
-*.iml
-out/*
-.idea/compiler.xml
-*.class
-*.js
 *.xml
-*.json
-classes/production/SocietySystem-grailsPlugins/uglifyjs/README.md
-SocietySystem.rar
+*.xml
+*.bytes
+*.xml
+*.class
 *.iml
+*.rar
+SocietySystem.iml
+*.tld
+*.yml
+.idea/workspace.xml

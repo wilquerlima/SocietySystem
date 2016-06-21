@@ -6,7 +6,6 @@
 
 
 import pages.RegisterFieldPage
-import societysystem.SocietyController
 import steps.TestAndDataOperations
 
 import static cucumber.api.groovy.EN.*
@@ -67,4 +66,5 @@ Then(~'^The system does register Field "([^"]*)"$'){String name ->
     t = new TestAndDataOperations()
     Field c = t.retornarCampoByname(name)
     assert c.value == 20
+    Field.deleteAll() //Then the test erases everything it has done to the system.
 }
