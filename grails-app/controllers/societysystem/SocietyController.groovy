@@ -15,7 +15,7 @@ class SocietyController {
     }
 
     def show(Society societyInstance) {
-        respond societyInstance
+        respond societyInstance, model: [maxProfit: returnProfit(societyInstance.getNome())]
     }
 
     def create() {
@@ -132,9 +132,7 @@ class SocietyController {
         int value = 0
         Society s = Society.findByNome(name)
         s.fields.each {
-            if (it.booked){
                 value += it.value
-            }
         }
         return value
     }

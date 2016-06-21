@@ -7,7 +7,6 @@
 		<meta name="layout" content="main">
 		<g:set var="entityName" value="${message(code: 'society.label', default: 'Society')}" />
 		<title><g:message code="default.show.label" args="[entityName]" /></title>
-
 	</head>
 	<body>
 		<a href="#show-society" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
@@ -45,8 +44,8 @@
 
 				<g:if test="${societyInstance?.fields}">
 					<li class="fieldcontain">
-						<span class="property-label" onload="returnProfit()">Profit</span>
-						<span class="property-value"></span>
+						<span class="property-label" >Profit</span>
+						<span class="property-value" >${maxProfit}</span>
 					</li>
 				</g:if>
 			
@@ -58,8 +57,6 @@
 					<g:link class="addfield" action="addField" resource="${societyInstance}">Add Field</g:link>
 				</fieldset>
 			</g:form>
-
 		</div>
-
 	</body>
 </html>
