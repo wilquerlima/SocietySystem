@@ -10,6 +10,6 @@ class Society {
     ]
 
     static constraints = {
-
+        nome unique: true
     }
 }

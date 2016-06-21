@@ -3,10 +3,9 @@ import societysystem.Society
 
 class Field {
 
-    int id
     String name
     int value
-
+    boolean booked
 
 
     static constraints = {

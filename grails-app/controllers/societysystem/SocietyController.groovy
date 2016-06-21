@@ -111,6 +111,38 @@ class SocietyController {
         render (view:'profit',[fields: c.getFields()])
     }
 
+    def addField(Society societyInstance){
+        respond societyInstance
+    }
+
+    /*Add a field to a Society Instance from AddField View
+    * And then returns to "Society/Show"
+    * */
+    def addFieldToSociety(Society societyInstance){
+        def f1 = Field.findByName(params.fieldName)
+        societyInstance.addToFields(f1)
+        societyInstance.save(flush: true)
+        render(view: 'show')
+    }
+
+    /*
+    * Return the profit a society given a society's name
+    * */
+    def returnProfit(String name){
+        int value = 0
+        Society s = Society.findByNome(name)
+        s.fields.each {
+            if (it.booked){
+                value += it.value
+            }
+        }
+        return value
+    }
+
+    def returnMaximumProfit(){
+
+    }
+
     def result(){
         render (view:"common/result")
     }

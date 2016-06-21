@@ -3,9 +3,11 @@
 <!DOCTYPE html>
 <html>
 	<head>
+
 		<meta name="layout" content="main">
 		<g:set var="entityName" value="${message(code: 'society.label', default: 'Society')}" />
 		<title><g:message code="default.show.label" args="[entityName]" /></title>
+
 	</head>
 	<body>
 		<a href="#show-society" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
@@ -40,15 +42,24 @@
 					
 				</li>
 				</g:if>
+
+				<g:if test="${societyInstance?.fields}">
+					<li class="fieldcontain">
+						<span class="property-label" onload="returnProfit()">Profit</span>
+						<span class="property-value"></span>
+					</li>
+				</g:if>
 			
 			</ol>
 			<g:form url="[resource:societyInstance, action:'delete']" method="DELETE">
 				<fieldset class="buttons">
 					<g:link class="edit" action="edit" resource="${societyInstance}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
 					<g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
+					<g:link class="addfield" action="addField" resource="${societyInstance}">Add Field</g:link>
 				</fieldset>
 			</g:form>
 
 		</div>
+
 	</body>
 </html>
