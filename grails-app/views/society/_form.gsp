@@ -2,21 +2,23 @@
 
 
 
-<div class="fieldcontain ${hasErrors(bean: societyInstance, field: 'code', 'error')} required">
-	<label for="code">
-		<g:message code="society.code.label" default="Code" />
+
+<div class="fieldcontain ${hasErrors(bean: societyInstance, field: 'name', 'error')} required">
+	<label for="name">
+		<g:message code="society.name.label" default="Name" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:field name="code" type="number" value="${societyInstance.code}" required=""/>
+	<g:textField name="name" required="" value="${societyInstance?.name}"/>
 
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: societyInstance, field: 'nome', 'error')} required">
-	<label for="nome">
-		<g:message code="society.nome.label" default="Nome" />
-		<span class="required-indicator">*</span>
+<div class="fieldcontain ${hasErrors(bean: societyInstance, field: 'schedules', 'error')} ">
+	<label for="schedules">
+		<g:message code="society.schedules.label" default="Schedules" />
+
 	</label>
-	<g:textField name="nome" required="" value="${societyInstance?.nome}"/>
+	<g:select  optionValue="time" name="schedules" from="${societysystem.Schedule.list()}" multiple="multiple" optionKey="id" size="5" value="${societyInstance?.schedules*.id}" class="many-to-many"/>
+
 
 </div>
 
