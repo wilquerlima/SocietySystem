@@ -9,7 +9,7 @@ class CreateSchedulePage extends Page {
     static url = "/SocietySystem/schedule/create"
 
     static at = {
-        title ==~ /Criar Schedule/
+        title ==~ /Create Schedule/
     }
 
     boolean createSchedule(String time, Boolean av){
