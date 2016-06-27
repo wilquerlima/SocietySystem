@@ -1,9 +1,7 @@
 package steps
 
 import cucumber.api.PendingException
-import pages.CreatePage
-import pages.OfferActivationPage
-import pages.OfferEditPage
+import pages.*
 import societysystem.Offer
 import societysystem.OfferController
 import static cucumber.api.groovy.EN.*
