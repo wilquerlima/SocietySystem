@@ -39,7 +39,7 @@
 					
 						<td >${fieldValue(bean: horarioInstance, field: "dia")}</td>
 					
-						<td class="${horarioInstance.ocupado? 'red' : 'green'}"><g:link action="select" id="${horarioInstance.id}">${fieldValue(bean: horarioInstance, field: "horaInicial")}</g:link></td>
+						<td ><g:link action="select" id="${horarioInstance.id}">${fieldValue(bean: horarioInstance, field: "horaInicial")}</g:link></td>
 					
 						<td>${fieldValue(bean: horarioInstance, field: "horaFinal")}</td>
 					

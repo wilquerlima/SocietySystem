@@ -11,11 +11,5 @@ class Pagamento {
         nomeCartao blank: false
         codigoSeg blank: false
         horario nullable: false
-
     }
-    def registro(Horario horario1){
-        def horario=horario1
-
-    }
-
 }

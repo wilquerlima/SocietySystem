@@ -10,10 +10,10 @@ Feature: make a reservation and pay it
 
       Scenario: make a reservation without availables schedules
         Given that all the schedules are occupied
-        When I try to reservate an schedule
+        When I try to make a reservation of a schedule
         Then The system makes no reservation
 
       Scenario: reservation with and without available schedules
         Given some schedules are not occupied
-        When I try to reservate an schedule
+        When I try to make a reservation of a schedule
         Then The system makes a reservation

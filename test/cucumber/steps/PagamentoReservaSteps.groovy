@@ -69,7 +69,7 @@ Given(~/^that all the schedules are occupied$/) { ->
 
 }
 
-When(~/^I try to reservate an schedule$/) { ->
+When(~/^I try to make a reservation of a schedule$/) { ->
     ocupadas=todasOcupadas(Horario.list())
     def controlador = new HorarioController()
     controlador.book()
