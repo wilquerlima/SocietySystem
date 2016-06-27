@@ -1,11 +1,7 @@
 package steps
 
 import org.springframework.scheduling.annotation.Schedules
-import pages.CreateSchedulePage
-import pages.CreateSocietyPage
-import pages.IndexSocietyPage
-import pages.SearchSocietiesPage
-import pages.SocietyComparatorPage
+import pages.*
 import societysystem.Society
 import societysystem.SocietyController
 import societysystem.Schedule
