@@ -1,10 +1,9 @@
 package support
 
-import societysystem.Offer
+import societysystem.*
 import geb.Browser
 import geb.binding.BindingUpdater
 import org.codehaus.groovy.grails.test.support.GrailsTestRequestEnvironmentInterceptor
-import societysystem.Offer
 
 import static cucumber.api.groovy.Hooks.*
 
@@ -16,8 +15,8 @@ Before () {
 }
 
 After () {
-    Offer.list().each { offer ->
-        offer.delete(flush:true)
+    Pessoa.list().each { pessoa ->
+        Pessoa.delete(flush:true)
     }
     scenarioInterceptor.destroy ()
     bindingUpdater.remove ()
