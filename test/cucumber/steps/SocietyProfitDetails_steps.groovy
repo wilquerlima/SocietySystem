@@ -4,20 +4,35 @@
 
 
 import pages.SocietyAddFieldPage
+import pages.SocietyShowPage
 import steps.TestAndDataOperations
 
 import static cucumber.api.groovy.EN.*
 import societysystem.Field
 import societysystem.Society
 
-Given(~'^I am at the Society Show Page$'){->
-    to SocietyDetailPage
-    at SocietyDetailPage
+Given(~'^I have a field "([^"]*)" that belongs to "([^"]*)"$'){ fieldName, societyName->
+    def f1 = new Field(name: fieldName, value: 20)
+    def s1 = new Society(nome: societyName, code: 3, fields: [])
+    t = new TestAndDataOperations()
+    t.cadastrarCampo(f1)
+    s1.addToFields(f1)
+    t.saveSociety(s1)
 }
 
-When(~'^I look for the field at the Profit Value$'){->}
+And(~'^I am at the Society Society Show Page of "([^"]*)"$'){ societyName ->
+    to SocietyShowPage
+    at SocietyShowPage
+}
 
-Then(~'^The sum of all Booked Fields values summed is shown$'){->}
+When(~'^I look for the field at the Profit Value$'){->
+    assert page.maxProfit != null
+}
+
+Then(~'^The sum of all Fields of "([^"]*)" values summed is shown$'){ societyName ->
+    def s1 = Society.findByNome(societyName)
+    assert t.returnProfit(s1.getNome()) == Integer.parseInt(page.maxProfit.text())
+}
 
 
 Given(~'^I have some Fields Booked that belong to a Society "([^"]*)"$'){ String societyName ->
@@ -39,7 +54,7 @@ When(~'^I want to see how much I am gonna make in total$'){->
     assert true
 }
 Then(~'^The system returns the sum of all "([^"]*)" Fields Value$'){String societyName ->
-    assert t.returnProfit(societyName) == 70
+    assert t.returnBookedProfit(societyName) == 70
 }
 
 

@@ -3,9 +3,10 @@ Feature: As an user,
   so that I am able to analyze better my profits
 
   Scenario: Show the profit of a Society will make on that day
-    Given I am at the Society Show Page
+    Given I have a field "f1" that belongs to "s1"
+    And I am at the Society Society Show Page of "s1"
     When I look for the field at the Profit Value
-    Then The sum of all Booked Fields values summed is shown
+    Then The sum of all Fields of "s1" values summed is shown
 
   Scenario: Show the maximum profit of a Society per hour
     Given I have some Fields Booked that belong to a Society "s1"

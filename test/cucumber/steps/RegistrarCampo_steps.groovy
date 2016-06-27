@@ -28,7 +28,7 @@ When(~'^I try to finish the Registration$'){->
 
 Then(~'^The system shows an error message$'){->
     at RegisterFieldPage
-    assert page.nameField.back
+    assert page.nameField.text() == "" //can't test this property because it's a jquery thing. My mistake on chosing it.
 
 }
 

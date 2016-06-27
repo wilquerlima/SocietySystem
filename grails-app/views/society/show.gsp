@@ -45,7 +45,7 @@
 				<g:if test="${societyInstance?.fields}">
 					<li class="fieldcontain">
 						<span class="property-label" >Profit</span>
-						<span class="property-value" >${maxProfit}</span>
+						<span class="property-value" id="maxProfit">${maxProfit}</span>
 					</li>
 				</g:if>
 			

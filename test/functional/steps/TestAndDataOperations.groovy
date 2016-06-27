@@ -30,6 +30,10 @@ class TestAndDataOperations {
         societyController.returnProfit(societyName)
     }
 
+    public float returnBookedProfit(String societyName){
+        societyController.returnBookedProfit(societyName)
+    }
+
     public void saveSociety(Society society){
         this.societyController.save(society)
     }

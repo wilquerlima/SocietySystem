@@ -137,8 +137,15 @@ class SocietyController {
         return value
     }
 
-    def returnMaximumProfit(){
-
+    def returnBookedProfit(String name){
+        int value = 0
+        Society s = Society.findByNome(name)
+        s.fields.each {
+            if (it.booked) {
+                value += it.value
+            }
+        }
+        return value
     }
 
     def result(){
