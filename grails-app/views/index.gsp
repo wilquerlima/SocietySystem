@@ -118,5 +118,6 @@
 				</ul>
 			</div>
 		</div>
+	<g:render template="/common/footer" />
 	</body>
 </html>
