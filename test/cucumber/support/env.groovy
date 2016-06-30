@@ -1,8 +1,7 @@
 package support
 
-
-
 import societysystem.*
+
 
 import geb.Browser
 import geb.binding.BindingUpdater
@@ -10,8 +9,10 @@ import org.codehaus.groovy.grails.test.support.GrailsTestRequestEnvironmentInter
 
 import static cucumber.api.groovy.Hooks.*
 
+
 def bindingUpdater
 def scenarioInterceptor
+
 
 Before () {
     bindingUpdater = new BindingUpdater(binding, new Browser())
@@ -21,6 +22,7 @@ Before () {
 }
 
 After () {
+
 
     Grupo.list().each { grupo ->
         grupo.delete(flush:true)
@@ -40,6 +42,14 @@ After () {
         offer.delete(flush:true)
     }
 
+
+
+    Horario.list().each { horario ->
+        horario.delete(flush:true)
+    }
+    Pagamento.list().each { pagamento ->
+        pagamento.delete(flush:true)
+    }
 
     scenarioInterceptor.destroy ()
     bindingUpdater.remove ()
