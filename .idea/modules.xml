@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/SocietySystem.iml" filepath="$PROJECT_DIR$/SocietySystem.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SocietySystem-grailsPlugins.iml" filepath="$PROJECT_DIR$/SocietySystem-grailsPlugins.iml" />
     </modules>
   </component>
 </project>

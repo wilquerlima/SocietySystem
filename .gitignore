@@ -31,3 +31,14 @@
 
 # "temporary" build files
 /target
+*.xml
+*.xml
+*.bytes
+*.xml
+*.class
+*.iml
+*.rar
+SocietySystem.iml
+*.tld
+*.yml
+.idea/workspace.xml
