@@ -1,27 +1,15 @@
-Feature: As um usuário,
-  I can criar, alterar, modificar e remover um Campo do meu Society
-  so that eu posso administrar o meu society de forma coerente
+Feature: As an user,
+  I can create, modify and remove a Field on Society
+  so that I am able to Manage my Society correctly
 
-  Scenario: Atualizar a lista de Campos assim que adicionar um novo
-    Given que o usuário cadastrou um campo ao seu Society
-    When clicar na imagem do seu society
-    Then uma lista atualizada com todos os campos cadastrados deve aparecer na tela "Campos do Society X"
+  Scenario: Register a Field that does not exist
+    Given There is no Field named "A"
+    When  I try to register the field "A"
+    Then The system does register Field "A"
 
-  Scenario[GUI]: Cadastrar Campo à Lista de Campos de um Society Específico
 
-    Given eu estou na tela de cadastro de Campos de um Society
-    And eu preencho os dados corretamente
-    When eu clico “Finalizar Cadastro”
-    Then eu sou enviado à tela de Detalhes do Society e Uma mensagem de Sucesso é mostrada
-
-  Scenario[GUI]: Cadastrar um mesmo campo duas vezes
-    Given eu estou na tela cadastrar campo
-    And preencho o nome do campo como campo “A”
-    When clico em “cadastrar o campo”
-    Then o sistema dá uma mensagem dizendo que o campo já existe
-
-  Scenario: Cadastrar Campo com dados insuficientes
-    Given eu estou na tela de cadastrar campo
-    And eu não preencho o nome do campo
-    When clico em "cadastrar o campo"
-    Then o sistem emite uma mensagem de erro
+  Scenario: Try to Register a Field with data missing
+    Given I am at Register Field page
+    And I do not fill the page name attribute field
+    When I try to finish the Registration
+    Then The system shows an error message

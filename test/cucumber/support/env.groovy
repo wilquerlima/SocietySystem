@@ -1,7 +1,9 @@
 package support
 
-import societysystem.Usuario
-import societysystem.Grupo
+
+
+import societysystem.*
+
 import geb.Browser
 import geb.binding.BindingUpdater
 import org.codehaus.groovy.grails.test.support.GrailsTestRequestEnvironmentInterceptor
@@ -19,6 +21,7 @@ Before () {
 }
 
 After () {
+
     Grupo.list().each { grupo ->
         grupo.delete(flush:true)
     }
@@ -26,6 +29,18 @@ After () {
         usuario ->
             usuario.delete(flush:true)
     }
+
+
+    Pessoa.list().each { pessoa ->
+        Pessoa.delete(flush:true)
+    }
+
+
+    Offer.list().each { offer ->
+        offer.delete(flush:true)
+    }
+
+
     scenarioInterceptor.destroy ()
     bindingUpdater.remove ()
 }
